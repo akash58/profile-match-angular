@@ -1,0 +1,31 @@
+
+  <swiper-container #swiper pagination="false">
+    <swiper-slide *ngFor="let image of interests">
+      <div class="card">
+        <div class="flex-container">
+          <img [src]="image.image" alt="Interest image">
+          <h3>{{ image.name }}</h3>
+          <div class="radio-option">
+            <form *ngIf="resultData.length > 0">
+              <div *ngFor="let result of resultData">
+                <label>
+                  <input
+                    type="radio"
+                    name="similarity"
+                    [value]="result.item"
+                    [(ngModel)]="selectedItem"
+                    (click)="compareTexts(result.item)"
+                  />
+                  {{ result.item }} (Score: {{ result.similarity | number: '1.2-2' }})
+                </label>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="profile-class">
+        <button (click)="goToProfile()">View profile</button>
+      </div>
+    </swiper-slide>
+  </swiper-container>
+  <app-spinner></app-spinner>
